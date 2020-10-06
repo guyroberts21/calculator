@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-image: linear-gradient(135deg, #84dcc6, #478978);
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/****************
+ Calculator 
+ ****************/
+
+.calculator {
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.6);
+}
