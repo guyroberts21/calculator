@@ -104,13 +104,15 @@ body {
   grid-area: clear;
 }
 
-.equal {
+.operator.equal {
   grid-area: equal;
   background-color: var(--clr-accent);
 }
 
-.equal:hover {
-  opacity: 0.9;
+.operator.equal:hover {
+  opacity: 0.75;
+  color: #fff;
+  background-color: var(--clr-dark);
 }
 
 .number {
@@ -118,10 +120,12 @@ body {
 }
 
 .number:hover {
+  transition: background-color 0.05s ease-in;
   background-color: var(--clr-sec);
 }
 
 .operator {
+  transition: background-color 0.1s ease-in;
   background-color: var(--clr-sec);
 }
 
