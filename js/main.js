@@ -1,3 +1,12 @@
+/*
+ Review Notes:
+ - Having really short functions (eg. the operations) is relatively pointless...
+ - Try re-doing this project BUT using just one event listener for all the keys
+   and no external functions except the calculate function
+ - Try using a different data structure to store the state of the calculator (use dataset properties)
+   and give each separate button a distinct data-type to use and refer to 
+ */
+
 const createCalculator = () => ({
   display: '0',
   num1: '',
@@ -10,6 +19,8 @@ let calculator = createCalculator();
 
 // Dom Elements
 const display = document.querySelector('.calculator-display');
+const numberBtns = document.querySelectorAll('.calculator-keys .number');
+const opBtns = document.querySelectorAll('.calculator-keys .operator');
 
 const plus = (a, b) => a + b;
 const minus = (a, b) => a - b;
@@ -17,21 +28,18 @@ const times = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 function operate(a, b, operator) {
-  if (operator === 'plus') return plus(a, b);
-  else if (operator === 'minus') return minus(a, b);
-  else if (operator === 'times') return times(a, b);
-  else if (operator === 'divide') return divide(a, b);
+  a = parseInt(a);
+  b = parseInt(b);
+
+  if (operator === 'plus') return a + b;
+  if (operator === 'minus') return a - b;
+  if (operator === 'times') return a * b;
+  if (operator === 'divide') return a / b;
 }
 
 function formatNum(n) {
   // always return to 2d.p.
   return (Math.round(n * 100) / 100).toFixed(1);
-}
-
-function resetCalculator() {}
-
-function updateDisplay(input) {
-  display.textContent = input;
 }
 
 function inputNumber(e) {
@@ -50,7 +58,7 @@ function inputNumber(e) {
   }
 
   // Update display
-  updateDisplay(calculator.display);
+  display.textContent = calculator.display;
 }
 
 function inputOperator(e) {
@@ -76,18 +84,15 @@ function calculate(c) {
   // stop fn if no second num
   if (!c.num2) return false;
 
-  const result = operate(Number(c.num1), Number(c.num2), c.operator);
+  const result = operate(c.num1, c.num2, c.operator);
 
   // reset num1 and reassign num1 (needs to be separate function)
   calculator.num1 = result;
   calculator.num2 = '';
 
-  updateDisplay(formatNum(result));
+  display.textContent = formatNum(result);
 }
 
 // Event listeners
-const numberBtns = document.querySelectorAll('.calculator-keys .number');
 numberBtns.forEach((num) => num.addEventListener('click', inputNumber));
-
-const opBtns = document.querySelectorAll('.calculator-keys .operator');
 opBtns.forEach((op) => op.addEventListener('click', inputOperator));
